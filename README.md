@@ -366,6 +366,11 @@ spring data jpa(integrating hibernate/jpa)
 
 
 
+------------
+h2-console----> for accessing the db
+
+
+
 
 
 
