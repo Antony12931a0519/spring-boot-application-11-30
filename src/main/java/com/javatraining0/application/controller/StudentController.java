@@ -37,7 +37,9 @@ public class StudentController {
 				.getAddress());
 	}
 
-	@RequestMapping(value = "/customQueryForFetchingAddressBasedonentity", produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
+	@RequestMapping(value = "/customQueryForFetchingAddressBasedonentity",
+			produces = "application/json", 
+			consumes = "application/json", method = { RequestMethod.POST })
 	public List<String> customQueryForFetchingAddressBasedonentity(
 			) {
 
