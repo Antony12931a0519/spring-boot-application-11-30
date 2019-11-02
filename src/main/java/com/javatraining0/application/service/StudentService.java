@@ -1,10 +1,13 @@
 package com.javatraining0.application.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.javatraining0.application.dao.StudentDAO;
@@ -39,7 +42,40 @@ public class StudentService {
 
 	public List<Student> getStudentDetailsByAddress(String address) {
 		List<Student> student = studentDAO.findStudentsByAddress(address);
+
 		return student;
+	}
+
+	public List<String> customQueryForFetchingAddressBasedonentity() {
+		Collection<String> addressList = studentDAO
+				.customQueryForFetchingAddressBasedonentity();
+
+		return (List<String>) addressList;
+	}
+
+	public List<String> customQueryForFetchingAddressusingEntityAndCriteria(
+			String address) {
+		Collection<String> addressList = studentDAO
+				.customQueryForFetchingAddressusingEntityAndCriteria(address);
+
+		return (List<String>) addressList;
+	}
+
+	public List<Student> customQueryForFetchingStudentRecordBasedOnMultipleCriteria(
+			String address, String name) {
+		Collection<Student> StudentsList = studentDAO
+				.customQueryForFetchingStudentRecordBasedOnMultipleCriteria(
+						address, name);
+
+		return (List<Student>) StudentsList;
+	}
+	
+	public List<Student> plainSqlQueryForFetchingStudentRecordsBasedOnCriteria(
+			) {
+		Collection<Student> StudentsList = studentDAO
+				.plainSqlQueryForFetchingStudentRecordsBasedOnCriteria();
+
+		return (List<Student>) StudentsList;
 	}
 
 }

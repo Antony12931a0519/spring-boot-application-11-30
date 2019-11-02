@@ -17,30 +17,57 @@ public class StudentController {
 	@Autowired
 	StudentService studentService;
 
-	@RequestMapping(value = "/studentlist",
-			produces = "application/json",
-			method = { RequestMethod.GET })
+	@RequestMapping(value = "/studentlist", produces = "application/json", method = { RequestMethod.GET })
 	public List<StudentModel> getstudentslist() {
 
 		return studentService.getStudents();
 	}
-	
-	@RequestMapping(value = "/studentdestails",
-			        produces = "application/json",
-					consumes = "application/json",
-			method = { RequestMethod.POST })
+
+	@RequestMapping(value = "/studentdestails", produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
 	public Student getStudentById(@RequestBody StudentModel studentModel) {
 
 		return studentService.getStudentDetailsById(studentModel.getSid());
 	}
-	
-	@RequestMapping(value = "/studentdestails/address",
-	        produces = "application/json",
-			consumes = "application/json",
-	method = { RequestMethod.POST })
-public List<Student> getStudentByAdress(@RequestBody StudentModel studentModel) {
 
-return studentService.getStudentDetailsByAddress(studentModel.getAddress());
-}
+	@RequestMapping(value = "/studentdestails/address", produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
+	public List<Student> getStudentByAdress(
+			@RequestBody StudentModel studentModel) {
+
+		return studentService.getStudentDetailsByAddress(studentModel
+				.getAddress());
+	}
+
+	@RequestMapping(value = "/customQueryForFetchingAddressBasedonentity", produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
+	public List<String> customQueryForFetchingAddressBasedonentity(
+			) {
+
+		return studentService.customQueryForFetchingAddressBasedonentity();
+	}
+
+	@RequestMapping(value = "/customQueryForFetchingAddressusingEntityAndCriteria", produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
+	public List<String> customQueryForFetchingAddressusingEntityAndCriteria(
+			@RequestBody StudentModel studentModel) {
+
+		return studentService
+				.customQueryForFetchingAddressusingEntityAndCriteria(studentModel
+						.getAddress());
+	}
+
+	@RequestMapping(value = "/customQueryForFetchingStudentRecordBasedOnMultipleCriteria", produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
+	public List<Student> customQueryForFetchingStudentRecordBasedOnMultipleCriteria(
+			@RequestBody StudentModel studentModel) {
+
+		return studentService
+				.customQueryForFetchingStudentRecordBasedOnMultipleCriteria(
+						studentModel.getAddress(), studentModel.getName());
+	}
+
+	@RequestMapping(value = "/plainSqlQueryForFetchingStudentRecordsBasedOnCriteria",
+			produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
+	public List<Student> plainSqlQueryForFetchingStudentRecordsBasedOnCriteria() {
+
+		return studentService
+				.plainSqlQueryForFetchingStudentRecordsBasedOnCriteria();
+	}
 
 }
