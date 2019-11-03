@@ -16,6 +16,9 @@ import com.javatraining0.application.models.StudentModel;
 public class StudentService {
 	@Autowired
 	StudentDAO studentDAO;
+	
+	/*@Autowired
+	FacultyDAO studentDAO;*/
 
 	public List<StudentModel> getStudents() {
 		List<StudentModel> list = new ArrayList<StudentModel>();
@@ -67,13 +70,40 @@ public class StudentService {
 
 		return (List<Student>) StudentsList;
 	}
-	
-	public List<Student> plainSqlQueryForFetchingStudentRecordsBasedOnCriteria(
-			) {
+
+	public List<Student> plainSqlQueryForFetchingStudentRecordsBasedOnCriteria() {
 		Collection<Student> StudentsList = studentDAO
 				.plainSqlQueryForFetchingStudentRecordsBasedOnCriteria();
 
 		return (List<Student>) StudentsList;
+	}
+
+	public String createStudentDetails(StudentModel studentModel)
+			throws Exception {
+
+		String result = null;
+		Student student = new Student();
+		student.setAddress(studentModel.getAddress());
+		student.setName(studentModel.getName());
+		student.setDept(studentModel.getDept());
+		student.setFacultyId(null);
+
+		try {
+			
+			//pull the detils of faculty
+			//fcultyao.find();
+			student = studentDAO.save(student);
+			if (student != null)
+				result = "Student Details are created Succesfully.";
+			else
+				result = "Student Details are not created";
+
+		} catch (Exception ex) {
+			throw new Exception("Exception occured beacuase of :" + ex);
+
+		}
+		return result;
+
 	}
 
 }

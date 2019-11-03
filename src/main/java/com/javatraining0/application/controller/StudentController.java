@@ -37,11 +37,8 @@ public class StudentController {
 				.getAddress());
 	}
 
-	@RequestMapping(value = "/customQueryForFetchingAddressBasedonentity",
-			produces = "application/json", 
-			consumes = "application/json", method = { RequestMethod.POST })
-	public List<String> customQueryForFetchingAddressBasedonentity(
-			) {
+	@RequestMapping(value = "/customQueryForFetchingAddressBasedonentity", produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
+	public List<String> customQueryForFetchingAddressBasedonentity() {
 
 		return studentService.customQueryForFetchingAddressBasedonentity();
 	}
@@ -64,12 +61,18 @@ public class StudentController {
 						studentModel.getAddress(), studentModel.getName());
 	}
 
-	@RequestMapping(value = "/plainSqlQueryForFetchingStudentRecordsBasedOnCriteria",
-			produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
+	@RequestMapping(value = "/plainSqlQueryForFetchingStudentRecordsBasedOnCriteria", produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
 	public List<Student> plainSqlQueryForFetchingStudentRecordsBasedOnCriteria() {
 
 		return studentService
 				.plainSqlQueryForFetchingStudentRecordsBasedOnCriteria();
+	}
+
+	@RequestMapping(value = "/create/student/details", produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
+	public String createStudentDetails(@RequestBody StudentModel studentModel)
+			throws Exception {
+
+		return studentService.createStudentDetails(studentModel);
 	}
 
 }

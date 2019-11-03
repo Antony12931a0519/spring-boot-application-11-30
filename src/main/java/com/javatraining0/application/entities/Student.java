@@ -22,6 +22,22 @@ public class Student {
 	private String dept;
 	@Column(name="student_address")
 	private String address;
+	@Column(name="faculty_id")
+	private String facultyId;
+
+	/**
+	 * @return the facultyId
+	 */
+	public String getFacultyId() {
+		return facultyId;
+	}
+
+	/**
+	 * @param facultyId the facultyId to set
+	 */
+	public void setFacultyId(String facultyId) {
+		this.facultyId = facultyId;
+	}
 
 	/**
 	 * @return the sid
