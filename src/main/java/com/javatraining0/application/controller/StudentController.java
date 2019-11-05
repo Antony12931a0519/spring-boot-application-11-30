@@ -18,7 +18,7 @@ public class StudentController {
 	StudentService studentService;
 
 	@RequestMapping(value = "/studentlist", produces = "application/json", method = { RequestMethod.GET })
-	public List<StudentModel> getstudentslist() {
+	public List<StudentModel> getstudentslist() throws InterruptedException {
 
 		return studentService.getStudents();
 	}
@@ -73,6 +73,25 @@ public class StudentController {
 			throws Exception {
 
 		return studentService.createStudentDetails(studentModel);
+	}
+
+	@RequestMapping(value = "/update/student/details",
+			produces = "application/json",
+			consumes = "application/json", method = { RequestMethod.PUT })
+	public String updateStudentDetails(@RequestBody StudentModel studentModel)
+			throws Exception {
+
+		return studentService.updateStudentDetails(studentModel);
+	}
+
+	//path param====Pathvariable
+	//query param===Requestparam
+	@RequestMapping(value = "/delete/student/details", produces = "application/json", 
+			consumes = "application/json", method = { RequestMethod.DELETE })
+	public String deleteStudentDetails(@RequestBody StudentModel studentModel)
+			throws Exception {
+
+		return studentService.deleteStudentDetails(studentModel);
 	}
 
 }

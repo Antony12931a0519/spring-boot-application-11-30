@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.javatraining0.application.dao.StudentDAO;
@@ -16,11 +17,13 @@ import com.javatraining0.application.models.StudentModel;
 public class StudentService {
 	@Autowired
 	StudentDAO studentDAO;
-	
-	/*@Autowired
-	FacultyDAO studentDAO;*/
 
-	public List<StudentModel> getStudents() {
+	/*
+	 * @Autowired FacultyDAO studentDAO;
+	 */
+	@Cacheable("studentslist")
+	public List<StudentModel> getStudents() throws InterruptedException {
+		Thread.sleep(1000 * 5);
 		List<StudentModel> list = new ArrayList<StudentModel>();
 		List<Student> students = (List<Student>) studentDAO.findAll();
 		for (Student s : students) {
@@ -86,17 +89,76 @@ public class StudentService {
 		student.setAddress(studentModel.getAddress());
 		student.setName(studentModel.getName());
 		student.setDept(studentModel.getDept());
-		student.setFacultyId(null);
+		// student.setFid(null);
 
 		try {
-			
-			//pull the detils of faculty
-			//fcultyao.find();
+
+			// pull the detils of faculty
+			// fcultyao.find();
 			student = studentDAO.save(student);
 			if (student != null)
 				result = "Student Details are created Succesfully.";
 			else
 				result = "Student Details are not created";
+
+		} catch (Exception ex) {
+			throw new Exception("Exception occured beacuase of :" + ex);
+
+		}
+		return result;
+
+	}
+
+	public String updateStudentDetails(StudentModel studentModel)
+			throws Exception {
+
+		String result = null;
+		Optional<Student> optionalStudent = studentDAO.findById(studentModel
+				.getSid());
+		Student student = optionalStudent.get();
+		
+		student.setAddress(studentModel.getAddress());
+		student.setName(studentModel.getName());
+		student.setDept(studentModel.getDept());
+		
+
+		try {
+
+			// pull the detils of faculty
+			// fcultyao.find();
+			student = studentDAO.save(student);
+			if (student != null)
+				result = "Student Details are updated Succesfully.";
+			else
+				result = "Student Details are not updated";
+
+		} catch (Exception ex) {
+			throw new Exception("Exception occured beacuase of :" + ex);
+
+		}
+		return result;
+
+	}
+
+	public String deleteStudentDetails(StudentModel studentModel)
+			throws Exception {
+
+		String result = null;
+		Optional<Student> optionalStudent = studentDAO.findById(studentModel
+				.getSid());
+		Student student = optionalStudent.get();
+		/*student.setAddress(studentModel.getAddress());
+		student.setName(studentModel.getName());
+		student.setDept(studentModel.getDept());
+		// student.setFid(null);
+*/
+		try {
+
+			// pull the detils of faculty
+			// fcultyao.find();
+			studentDAO.deleteById(student.getSid());
+
+			result = "Student Details are deleted Succesfully.";
 
 		} catch (Exception ex) {
 			throw new Exception("Exception occured beacuase of :" + ex);

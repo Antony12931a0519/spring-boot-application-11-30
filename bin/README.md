@@ -370,21 +370,9 @@ spring data jpa(integrating hibernate/jpa)
 h2-console----> for accessing the db
 
 
-security
------------
-
-basic authentication
 
 
-APIGEE(product of google)
 
-
-creation of proxoies/apigeee endpoints(network)
-
-default use : user
-password: 5b3b5d61-6bae-49f9-a682-92076e8297d5
-
-oauth
 
 
 
