@@ -1,6 +1,7 @@
 package com.javatraining0.application.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javatraining0.application.entities.Student;
 import com.javatraining0.application.models.StudentModel;
+import com.javatraining0.application.security.configuration.ProjectSpecificException;
 import com.javatraining0.application.service.StudentService;
 
 @RestController
@@ -18,11 +20,24 @@ public class StudentController {
 	StudentService studentService;
 
 	@RequestMapping(value = "/studentlist", produces = "application/json", method = { RequestMethod.GET })
-	public List<StudentModel> getstudentslist() throws InterruptedException {
+	public List<StudentModel> getstudentslist() throws Exception {
 
 		return studentService.getStudents();
 	}
 
+	@RequestMapping(value = "/studentlist/jdbc", produces = "application/json", method = { RequestMethod.GET })
+	public List<Map<String,Object>> getstudentslistjdbc() throws InterruptedException {
+
+		return studentService.getStudentsUsingJdbcTeplate();
+	}
+	
+	@RequestMapping(value = "/studentlist/em", produces = "application/json", method = { RequestMethod.GET })
+	public List<Student> getstudentslistEm() throws InterruptedException {
+
+		return studentService.getStudentsUsingEntityManager();
+	}
+
+	
 	@RequestMapping(value = "/studentdestails", produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
 	public Student getStudentById(@RequestBody StudentModel studentModel) {
 

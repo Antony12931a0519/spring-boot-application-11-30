@@ -12,6 +12,8 @@ import com.javatraining0.application.entities.Student;
 
 @Repository
 public interface StudentDAO extends CrudRepository<Student, Integer> {
+	
+	
 
 	public List<Student> findStudentsByAddress(String address);
 

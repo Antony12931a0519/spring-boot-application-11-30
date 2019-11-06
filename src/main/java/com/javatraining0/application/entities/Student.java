@@ -1,28 +1,40 @@
 package com.javatraining0.application.entities;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
 @Entity
-@Table(name= "STUDENT")
+@Table(name = "STUDENT")
+@SqlResultSetMapping(name = "mapppinNativeQuery", // same as resultSetMapping
+													// above in NativeQuery
+classes = { @ConstructorResult(targetClass = com.javatraining0.application.entities.Student.class, columns = {
+		@ColumnResult(name = "student_id", type = Integer.class),
+		@ColumnResult(name = "student_name", type = String.class),
+		@ColumnResult(name = "student_dept", type = String.class),
+		@ColumnResult(name = "student_address", type = String.class)
+
+}) })
 public class Student {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="student_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "student_id")
 	private int sid;
-	@Column(name="student_name")
-	//student_name
+	@Column(name = "student_name")
+	// student_name
 	private String name;
-	@Column(name="student_dept")
+	@Column(name = "student_dept")
 	private String dept;
-	@Column(name="student_address")
+	@Column(name = "student_address")
 	private String address;
-	@Column(name="faculty_id")
+	@Column(name = "faculty_id")
 	private String facultyId;
 
 	/**
@@ -33,7 +45,8 @@ public class Student {
 	}
 
 	/**
-	 * @param facultyId the facultyId to set
+	 * @param facultyId
+	 *            the facultyId to set
 	 */
 	public void setFacultyId(String facultyId) {
 		this.facultyId = facultyId;
@@ -46,7 +59,9 @@ public class Student {
 		return sid;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -68,6 +83,18 @@ public class Student {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	public Student(int sid, String name, String dept, String address) {
+		super();
+		this.sid = sid;
+		this.name = name;
+		this.dept = dept;
+		this.address = address;
+	}
+
+	public Student() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**

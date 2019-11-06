@@ -390,8 +390,18 @@ oauth
 
 
 
+--------------------------
+
+swagger url
+
+swagger-ui.html
+
+http://localhost:1111/swagger-ui.html
 
 
+Jdbc Template
+
+Entity Manager
 
 
 

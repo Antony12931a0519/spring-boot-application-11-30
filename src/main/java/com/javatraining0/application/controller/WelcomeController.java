@@ -6,8 +6,13 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.javatraining0.application.utility.ApplicationProperties;
+
 @RestController
 public class WelcomeController {
+	
+	@Autowired
+	ApplicationProperties applicationProperties;
 
 	@Autowired
 	private Environment env;
@@ -26,7 +31,8 @@ public class WelcomeController {
 	public String showWelcomeMessageToUser() {
 		// return "Welcome to my Application!" +
 		// env.getProperty("application.username");
-		return "Welcome to my Application!" + val1;
+//		return "Welcome to my Application!" + val1;
+		return "Welcome to my Application!" + applicationProperties.getUsername();
 	}
 
 }
