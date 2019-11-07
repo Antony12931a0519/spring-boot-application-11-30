@@ -19,7 +19,10 @@ public class CustomStudentDAO {
 	@SuppressWarnings("unchecked")
 	public List<Student> findSudentDetails() {
 
-		Query query = entityManager.createNativeQuery("select * from student","mapppinNativeQuery");
+		Query query = entityManager.
+				createNativeQuery("select * from student","mapppinNativeQuery");
+		
+		
 		return query.getResultList();
 
 	}

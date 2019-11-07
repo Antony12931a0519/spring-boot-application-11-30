@@ -21,8 +21,10 @@ import com.javatraining0.application.security.configuration.ProjectSpecificExcep
 public class StudentService {
 	@Autowired
 	StudentDAO studentDAO;
+	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	
 	@Autowired
 	CustomStudentDAO customStudentDAO;
 

@@ -405,10 +405,69 @@ Entity Manager
 
 
 
+--------------------------------------------
+
+Jdbc Template
+
+---------------------------------------------
+entity manager
+
+
+
+@SqlResultSetMapping(name = "mapppinNativeQuery", // same as resultSetMapping
+													// above in NativeQuery
+classes = { @ConstructorResult(targetClass = com.javatraining0.application.entities.Student.class, columns = {
+		@ColumnResult(name = "student_id", type = Integer.class),
+		@ColumnResult(name = "student_name", type = String.class),
+		@ColumnResult(name = "student_dept", type = String.class),
+		@ColumnResult(name = "student_address", type = String.class)
+
+}) })
+
+
+error : no entity found/ appropriate constructor not found
 
 
 
 
+
+---------------------
+on top of class add the annotation
+
+eg : class A{
+m1(){
+}
+}
+
+
+class ATest{
+
+@InjectMocks
+StudentService service;
+
+@Mock
+	StudentDAO studentDAO;
+
+@Mock
+dependent classes
+
+public void m1Test(){
+
+List<Student> students = (List<Student>) studentDAO.findAll();
+
+List<Student> students = new ArrayList();
+
+Mockito.when(studentDAO.findAll()).thenRetuen(students);
+Mockito.when(studentDAO.findAll()).thenRetuen(students);
+Mockito.when(studentDAO.findAll()).thenRetuen(students);
+Mockito.when(studentDAO.findAll()).thenRetuen(students);
+
+service.getStudents();
+
+}
+
+
+}
 
 
 

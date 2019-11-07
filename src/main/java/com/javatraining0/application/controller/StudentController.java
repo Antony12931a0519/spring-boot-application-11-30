@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javatraining0.application.entities.Student;
 import com.javatraining0.application.models.StudentModel;
-import com.javatraining0.application.security.configuration.ProjectSpecificException;
 import com.javatraining0.application.service.StudentService;
 
 @RestController

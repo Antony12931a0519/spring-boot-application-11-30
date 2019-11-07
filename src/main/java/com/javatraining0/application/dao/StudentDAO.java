@@ -30,6 +30,7 @@ public interface StudentDAO extends CrudRepository<Student, Integer> {
 	public Collection<Student> customQueryForFetchingStudentRecordBasedOnMultipleCriteria(
 			@Param("address") String address, @Param("name") String name);
 
+	//when ever we use plain sql queries
 	@Query(value = "select * from Student where student_name = '1'", nativeQuery = true)
 	public Collection<Student> plainSqlQueryForFetchingStudentRecordsBasedOnCriteria();
 
