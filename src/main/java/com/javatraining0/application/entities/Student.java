@@ -17,8 +17,9 @@ import javax.persistence.Table;
 classes = { @ConstructorResult(targetClass = com.javatraining0.application.entities.Student.class, columns = {
 		@ColumnResult(name = "student_id", type = Integer.class),
 		@ColumnResult(name = "student_name", type = String.class),
-		@ColumnResult(name = "student_address", type = String.class),
-		@ColumnResult(name = "student_dept", type = String.class)
+		@ColumnResult(name = "student_dept", type = String.class),
+		@ColumnResult(name = "student_address", type = String.class)
+		
 		
 
 }) })
@@ -29,7 +30,6 @@ public class Student {
 	@Column(name = "student_id")
 	private int sid;
 	@Column(name = "student_name")
-	// student_name
 	private String name;
 	@Column(name = "student_dept")
 	private String dept;
@@ -86,7 +86,7 @@ public class Student {
 		return name;
 	}
 
-	public Student(int sid,String dept,  String name, String address) {
+	public Student(int sid,  String name,String dept, String address) {
 		super();
 		this.sid = sid;
 		this.name = name;

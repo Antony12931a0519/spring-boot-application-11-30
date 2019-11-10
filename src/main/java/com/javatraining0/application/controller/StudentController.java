@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.javatraining0.application.aop.TrackAfterExecution;
+import com.javatraining0.application.aop.TrackBeforeExecution;
 import com.javatraining0.application.entities.Student;
 import com.javatraining0.application.models.StudentModel;
 import com.javatraining0.application.service.StudentService;
@@ -18,6 +20,9 @@ public class StudentController {
 	@Autowired
 	StudentService studentService;
 
+//	@TrackTime
+	@TrackBeforeExecution
+	@TrackAfterExecution
 	@RequestMapping(value = "/studentlist", produces = "application/json", method = { RequestMethod.GET })
 	public List<StudentModel> getstudentslist() throws Exception {
 
@@ -25,18 +30,18 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/studentlist/jdbc", produces = "application/json", method = { RequestMethod.GET })
-	public List<Map<String,Object>> getstudentslistjdbc() throws InterruptedException {
+	public List<Map<String, Object>> getstudentslistjdbc()
+			throws InterruptedException {
 
 		return studentService.getStudentsUsingJdbcTeplate();
 	}
-	
+
 	@RequestMapping(value = "/studentlist/em", produces = "application/json", method = { RequestMethod.GET })
 	public List<Student> getstudentslistEm() throws InterruptedException {
 
 		return studentService.getStudentsUsingEntityManager();
 	}
 
-	
 	@RequestMapping(value = "/studentdestails", produces = "application/json", consumes = "application/json", method = { RequestMethod.POST })
 	public Student getStudentById(@RequestBody StudentModel studentModel) {
 
@@ -89,19 +94,16 @@ public class StudentController {
 		return studentService.createStudentDetails(studentModel);
 	}
 
-	@RequestMapping(value = "/update/student/details",
-			produces = "application/json",
-			consumes = "application/json", method = { RequestMethod.PUT })
+	@RequestMapping(value = "/update/student/details", produces = "application/json", consumes = "application/json", method = { RequestMethod.PUT })
 	public String updateStudentDetails(@RequestBody StudentModel studentModel)
 			throws Exception {
 
 		return studentService.updateStudentDetails(studentModel);
 	}
 
-	//path param====Pathvariable
-	//query param===Requestparam
-	@RequestMapping(value = "/delete/student/details", produces = "application/json", 
-			consumes = "application/json", method = { RequestMethod.DELETE })
+	// path param====Pathvariable
+	// query param===Requestparam
+	@RequestMapping(value = "/delete/student/details", produces = "application/json", consumes = "application/json", method = { RequestMethod.DELETE })
 	public String deleteStudentDetails(@RequestBody StudentModel studentModel)
 			throws Exception {
 

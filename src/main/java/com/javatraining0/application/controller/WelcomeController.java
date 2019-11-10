@@ -6,6 +6,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.javatraining0.application.aop.TrackTime;
 import com.javatraining0.application.utility.ApplicationProperties;
 
 @RestController
@@ -22,6 +23,7 @@ public class WelcomeController {
 
 	// @Value("$val1") private static String value1;
 
+	@TrackTime
 	@RequestMapping("/welcome/page")
 	public String showWelcomeMessage() {
 		return "Welcome to my Application!";

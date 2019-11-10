@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +30,9 @@ public class StudentService {
 	/*
 	 * @Autowired FacultyDAO studentDAO;
 	 */
-	@Cacheable("studentslist")
+//	@Cacheable("studentslist")
 	public List<StudentModel> getStudents() throws InterruptedException, ProjectSpecificException {
-		Thread.sleep(1000 * 5);
+		
 		List<StudentModel> list = new ArrayList<StudentModel>();
 		List<Student> students = (List<Student>) studentDAO.findAll();
 		for (Student s : students) {
@@ -58,6 +57,7 @@ public class StudentService {
 			throws InterruptedException {
 		List<Map<String, Object>> list = jdbcTemplate
 				.queryForList("select * from student");
+		System.out.println(list);
 		return list;
 	}
 

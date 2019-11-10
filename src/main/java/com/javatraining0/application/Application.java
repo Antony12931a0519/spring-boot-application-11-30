@@ -3,12 +3,14 @@ package com.javatraining0.application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-//@EnableResourceServer
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
 @SpringBootApplication
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableCaching
 public class Application {
 
-	public static void main(String[] args) { 
+	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
