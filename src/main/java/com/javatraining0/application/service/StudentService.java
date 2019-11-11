@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.javatraining0.application.dao.CustomStudentDAO;
 import com.javatraining0.application.dao.StudentDAO;
+import com.javatraining0.application.dao.StudentDAO1;
 import com.javatraining0.application.entities.Student;
 import com.javatraining0.application.models.StudentModel;
 import com.javatraining0.application.security.configuration.ProjectSpecificException;
@@ -22,19 +23,25 @@ public class StudentService {
 	StudentDAO studentDAO;
 	
 	@Autowired
+	StudentDAO1 studentDAO1;
+
+	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
+
 	@Autowired
 	CustomStudentDAO customStudentDAO;
 
 	/*
 	 * @Autowired FacultyDAO studentDAO;
 	 */
-//	@Cacheable("studentslist")
-	public List<StudentModel> getStudents() throws InterruptedException, ProjectSpecificException {
-		
+	// @Cacheable("studentslist")
+	public List<StudentModel> getStudents() throws InterruptedException,
+			ProjectSpecificException {
+
 		List<StudentModel> list = new ArrayList<StudentModel>();
 		List<Student> students = (List<Student>) studentDAO.findAll();
+
+		studentDAO1.dummy();
 		for (Student s : students) {
 
 			StudentModel model = new StudentModel();
@@ -44,11 +51,11 @@ public class StudentService {
 			model.setName(s.getName());
 			list.add(model);
 		}
-		
-		
-		if(list.isEmpty())
-			throw new ProjectSpecificException("No details are existing in the system");
-		
+
+		if (list.isEmpty())
+			throw new ProjectSpecificException(
+					"No details are existing in the system");
+
 		return list;
 
 	}

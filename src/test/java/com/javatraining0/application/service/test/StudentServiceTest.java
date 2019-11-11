@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +19,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.javatraining0.application.dao.StudentDAO;
+import com.javatraining0.application.dao.StudentDAO1;
 import com.javatraining0.application.entities.Student;
+import com.javatraining0.application.models.StudentModel;
 import com.javatraining0.application.security.configuration.ProjectSpecificException;
 import com.javatraining0.application.service.StudentService;
 
@@ -29,6 +33,10 @@ public class StudentServiceTest {
 	StudentService studentService;
 	@Mock
 	StudentDAO studentDAO;
+	
+	@Mock
+	StudentDAO1 studentDAO1;
+	
 	@Mock
 	JdbcTemplate jdbcTemplate;
 
@@ -38,6 +46,7 @@ public class StudentServiceTest {
 		MockitoAnnotations.initMocks(this);
 	}
 
+	
 	@Test
 	public void testGetStudentsForSuccess() {
 
@@ -45,16 +54,20 @@ public class StudentServiceTest {
 			// ECLEMMA
 			List<Student> students = new ArrayList<Student>();
 			Student student = new Student();
-			student.setAddress("hj,j");
+			student.setAddress("India");
 			student.setDept("qfqwd");
 			student.setFacultyId("jfkle");
-			student.setName("kugyioj");
+			student.setName("Antony");
 			students.add(student);
 
+			Mockito.doNothing().when(studentDAO1).dummy();
 			Mockito.when(studentDAO.findAll()).thenReturn(students);
 
 			// Mockito.when(method2).thenReturn(retun type of m2);
-			studentService.getStudents();
+			List<StudentModel> studentsList = studentService.getStudents();
+//			Assert.assertEquals(1, studentsList.size());
+			Assert.assertEquals("Antony", studentsList.get(0).getName());
+			Assert.assertEquals("India", studentsList.get(0).getAddress());
 		} catch (InterruptedException e) {
 
 			e.printStackTrace();
@@ -63,6 +76,33 @@ public class StudentServiceTest {
 			e.printStackTrace();
 		}
 	}
+	
+	/*@Test
+	public void testGetStudentsForSuccess1() {
+
+		
+			// ECLEMMA
+			List<Student> students = new ArrayList<Student>();
+			Student student = new Student();
+			student.setAddress("India");
+			student.setDept("qfqwd");
+			student.setFacultyId("jfkle");
+			student.setName("Antony");
+			students.add(student);
+
+			Mockito.when(studentDAO.findAll()).thenReturn(students);
+			
+//			Mockito.when(studentDAO.findAll()).thenReturn(null);
+//			Mockito.doNothing().when(studentDAO).findAll();
+			
+//			Mockito.doThrow(Exception.class).when(studentDAO.findAll());
+			// Mockito.when(method2).thenReturn(retun type of m2);
+			List<StudentModel> studentsList = studentService.getStudents();
+//			Assert.assertEquals(1, studentsList.size());
+			Assert.assertEquals("Antony", studentsList.get(0).getName());
+			Assert.assertEquals("India", studentsList.get(0).getAddress());
+		
+	}*/
 
 	@Test
 	public void testGetStudentsUsingJdbcTeplate() throws InterruptedException {
