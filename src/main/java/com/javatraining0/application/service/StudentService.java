@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -19,9 +21,12 @@ import com.javatraining0.application.security.configuration.ProjectSpecificExcep
 
 @Service
 public class StudentService {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(StudentService.class);
 	@Autowired
 	StudentDAO studentDAO;
-	
+
 	@Autowired
 	StudentDAO1 studentDAO1;
 
@@ -38,6 +43,7 @@ public class StudentService {
 	public List<StudentModel> getStudents() throws InterruptedException,
 			ProjectSpecificException {
 
+		long startTime = System.currentTimeMillis();
 		List<StudentModel> list = new ArrayList<StudentModel>();
 		List<Student> students = (List<Student>) studentDAO.findAll();
 
@@ -56,6 +62,9 @@ public class StudentService {
 			throw new ProjectSpecificException(
 					"No details are existing in the system");
 
+		long endTime = System.currentTimeMillis();
+
+		
 		return list;
 
 	}
@@ -138,6 +147,9 @@ public class StudentService {
 				result = "Student Details are not created";
 
 		} catch (Exception ex) {
+			logger.error("ytuyiuoipopiuytryui");
+			// logger.info("ytuyiuoipopiuytryui");
+
 			throw new Exception("Exception occured beacuase of :" + ex);
 
 		}

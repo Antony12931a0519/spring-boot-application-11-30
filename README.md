@@ -471,6 +471,25 @@ service.getStudents();
 
 
 
+logging mechanism
+-------------------
+log4j and slf4j
+
+
+levels of logging
+info
+debug
+error
+
+security vulnerabilties
+-----------------------
+
+
+
+
+
+AOP(Aspect Oriented Programming)
+
 
 
 

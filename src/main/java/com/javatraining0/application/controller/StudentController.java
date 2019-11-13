@@ -3,29 +3,31 @@ package com.javatraining0.application.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.javatraining0.application.aop.TrackAfterExecution;
-import com.javatraining0.application.aop.TrackBeforeExecution;
 import com.javatraining0.application.entities.Student;
 import com.javatraining0.application.models.StudentModel;
 import com.javatraining0.application.service.StudentService;
 
 @RestController
 public class StudentController {
+	private static final Logger logger = LoggerFactory
+			.getLogger(StudentController.class);
 	@Autowired
 	StudentService studentService;
 
-//	@TrackTime
-	@TrackBeforeExecution
-	@TrackAfterExecution
+//	 @TrackTime
+//	@TrackBeforeExecution
+//	@TrackAfterExecution
 	@RequestMapping(value = "/studentlist", produces = "application/json", method = { RequestMethod.GET })
 	public List<StudentModel> getstudentslist() throws Exception {
-
+		
 		return studentService.getStudents();
 	}
 

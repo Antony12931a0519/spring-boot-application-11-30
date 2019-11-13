@@ -30,12 +30,12 @@ public class LoggingAspect {
 		Object[] arguments = pje.getArgs();
 
 		logger.info("Execution in class:" + className + " and method is :"
-				+ methodName + " and arguments are :" + arguments);
+				+ methodName + "()  and arguments are :" + arguments);
 
 		Object obj = pje.proceed();
 
 		logger.info("Execution in class:" + className + " and method is :"
-				+ methodName + " and arguments are :" + arguments
+				+ methodName + "() and arguments are :" + arguments
 				+ "and the response is :"
 				+ objectMapper.writeValueAsString(arguments));
 		return obj;

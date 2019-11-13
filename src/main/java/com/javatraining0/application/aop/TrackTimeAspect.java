@@ -23,7 +23,7 @@ public class TrackTimeAspect {
 		Object obj = pje.proceed();
 		long endTime = System.currentTimeMillis();
 
-		System.out.println("Time taken to executethe method is : "
+		logger.info("Time taken to executethe method is : "
 				+ (endTime - startTime));
 		return obj;
 
