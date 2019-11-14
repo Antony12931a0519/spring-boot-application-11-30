@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.javatraining0.application.aop.TrackAfterExecution;
+import com.javatraining0.application.aop.TrackBeforeExecution;
 import com.javatraining0.application.entities.Student;
 import com.javatraining0.application.models.StudentModel;
 import com.javatraining0.application.service.StudentService;
@@ -23,8 +25,8 @@ public class StudentController {
 	StudentService studentService;
 
 //	 @TrackTime
-//	@TrackBeforeExecution
-//	@TrackAfterExecution
+	@TrackBeforeExecution
+	@TrackAfterExecution
 	@RequestMapping(value = "/studentlist", produces = "application/json", method = { RequestMethod.GET })
 	public List<StudentModel> getstudentslist() throws Exception {
 		

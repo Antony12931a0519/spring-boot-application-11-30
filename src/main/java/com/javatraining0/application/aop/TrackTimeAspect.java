@@ -5,6 +5,7 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -28,23 +29,24 @@ public class TrackTimeAspect {
 		return obj;
 
 	}
+	
+	/*@Pointcut(value = "execution(* com.javatraining0.application.*.*.*(..))")
+	public void pointCut1() {
+
+	}*/
+
 
 	@Before("@annotation(com.javatraining0.application.aop.TrackBeforeExecution)")
-	public void logBeforeExec()  {
+	public void logBeforeExec() {
 
-		
-
-		System.out.println("Eecution Started");
-		
+		logger.info("Eecution method  Started");
 
 	}
 
 	@After("@annotation(com.javatraining0.application.aop.TrackAfterExecution)")
 	public void logAfterExec() {
 
-		System.out.println("Execution Ended: ");
-		
-	
+		logger.info("Execution Ended: ");
 
 	}
 

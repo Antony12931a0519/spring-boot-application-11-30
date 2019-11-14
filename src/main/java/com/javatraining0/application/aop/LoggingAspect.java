@@ -16,12 +16,12 @@ public class LoggingAspect {
 
 	Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
-	@Pointcut(value = "execution(* com.javatraining0.application.*.*.*(..))")
+	/*@Pointcut(value = "execution(* com.javatraining0.application.*.*.*(..))")
 	public void pointCut1() {
 
-	}
+	}*/
 
-	@Around("pointCut1()")
+	/*@Around("pointCut1()")
 	public Object logData(ProceedingJoinPoint pje) throws Throwable {
 
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -41,4 +41,4 @@ public class LoggingAspect {
 		return obj;
 
 	}
-}
+*/}
