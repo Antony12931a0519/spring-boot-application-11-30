@@ -490,7 +490,11 @@ security vulnerabilties
 
 AOP(Aspect Oriented Programming)
 
-
+Spring security custom username and password.
+------------------------------------------
+security.user.name=antony
+security.user.password=antony
+management.security.role=SUPERUSER
 
 
 
